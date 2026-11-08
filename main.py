@@ -137,22 +137,25 @@ class QuizGame:
     def add_quiz(self):
         print("\n===== 퀴즈 추가하기 =====")
 
-        question = input("문제를 입력하세요: ").strip()
+        while True:
+            question = input("문제를 입력하세요: ").strip()
 
-        if not question:
-            print("문제는 비워둘 수 없습니다.")
-            return
+            if question:
+                break
+
+            print("문제는 비워둘 수 없습니다. 다시 입력해 주세요.")
 
         choices = []
 
         for i in range(4):
-            choice = input(f"{i + 1}번 선택지를 입력하세요: ").strip()
+            while True:
+                choice = input(f"{i + 1}번 선택지를 입력하세요: ").strip()
 
-            if not choice:
-                print("선택지는 비워둘 수 없습니다.")
-                return
+                if choice:
+                    choices.append(choice)
+                    break
 
-            choices.append(choice)
+                print("선택지는 비워둘 수 없습니다. 다시 입력해 주세요.")
 
         while True:
             answer = input("정답 번호를 입력하세요 (1~4): ").strip()
@@ -171,7 +174,7 @@ class QuizGame:
 
         self.quizzes.append(Quiz(question, choices, answer))
         self.save_data()
-        print("퀴즈가 추가되었습니다!")
+        print("퀴즈가 추가되었습니다.")
 
     def show_best_score(self):
         print("\n===== 최고 점수 =====")
